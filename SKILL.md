@@ -1,4 +1,3 @@
-
 ---
 name: frontend-code-review
 description: Use this skill whenever the user asks to review, audit, or check frontend or Node.js code (React, Next.js, TypeScript, Node.js/Express backend, or React + TanStack projects) against this team's conventions — including PR reviews, "review this component/file/PR", code quality checks, or requests to check naming, folder structure, git branch/commit names, imports, or general best practices (performance, re-renders, state management, accessibility, security, testing). Always consult this skill before giving code review feedback on any frontend or Node.js file, diff, or pull request for this team, even if the user doesn't say the word "review" — e.g. "does this component look okay", "check my PR", "is this the right way to structure this hook".
