@@ -1,3 +1,4 @@
+
 ---
 name: frontend-code-review
 description: Use this skill whenever the user asks to review, audit, or check frontend or Node.js code (React, Next.js, TypeScript, Node.js/Express backend, or React + TanStack projects) against this team's conventions — including PR reviews, "review this component/file/PR", code quality checks, or requests to check naming, folder structure, git branch/commit names, imports, or general best practices (performance, re-renders, state management, accessibility, security, testing). Always consult this skill before giving code review feedback on any frontend or Node.js file, diff, or pull request for this team, even if the user doesn't say the word "review" — e.g. "does this component look okay", "check my PR", "is this the right way to structure this hook".
@@ -22,6 +23,7 @@ This is a **full, comprehensive review**: team conventions + general engineering
 6. **Check every applicable category explicitly** — don't skip a category just because the code looks fine at a glance.
 7. **Classify severity** per the model below.
 8. **Report** using the format below.
+9. **Offer to fix.** Don't touch the code automatically — after the report, ask what the person wants done next. See "After the review" below.
 
 ## Severity model
 
@@ -78,6 +80,17 @@ Every review gives the person three things, in this order: what they did well, t
 ```
 
 For a multi-file PR, repeat this structure per file, or use one combined table with a leading "File" column if there are many small files — but keep a single "what you did well" and "how to improve" roll-up for the PR as a whole so the feedback doesn't get lost in repetition. Don't pad the table with rows for rules that plainly don't apply to the code at hand (e.g. don't check Node.js middleware conventions on a pure UI component file).
+
+## After the review
+
+The report is just a report until the person says otherwise — never start editing code automatically. Once the report is delivered, ask what they want done next. Use tappable options if the interface supports them; otherwise ask in plain text. Offer choices along these lines:
+
+- Fix the blockers now
+- Fix blockers and suggestions
+- Let me specify exactly which items to fix
+- Nothing for now — just wanted the review
+
+If they choose "let me specify," ask which rows/categories/files they mean (e.g. "which ones — all the import-order ones, or something specific?") rather than guessing. Once the scope is clear, make the edits, then give a short summary of what changed — don't re-print the whole review table again, that's redundant. If a fix genuinely has more than one reasonable approach (e.g. "poor state management" could be solved a few different ways), briefly say which approach you're taking before applying it rather than silently picking one.
 
 ## Language
 
