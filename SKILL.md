@@ -11,19 +11,25 @@ This is a **full, comprehensive review**: team conventions + general engineering
 
 ## Workflow
 
-1. **Identify what's being reviewed.** Code pasted inline, an uploaded file/diff, a PR description, a branch name, a commit message. If nothing concrete has been shared yet, ask the user to paste the code/diff or point to the file(s) — don't guess at code that doesn't exist.
-2. **Detect the stack.** Look for Next.js app-router markers (`app/`, `"use client"`, `page.tsx`), plain React+TS, Node/Express-style backend code (routes, controllers, middleware), and TanStack usage (`useQuery`, `useMutation`, `@tanstack/*` imports). Check `package.json` if available. If genuinely ambiguous and it changes what rules apply, ask.
-3. **Always load `references/team-conventions.md`** — the mandatory shared rulebook: git (branch/commit), naming, folder structure (Atomic Design), imports, table text-alignment. This applies regardless of stack.
-4. **Load the matching stack file(s)** — a file can match more than one (e.g. Next.js + TanStack Query):
+1. **Get the diff first — always.** Before reading any file in full, run `git diff` to see exactly what changed:
+   - If the user is on a feature branch and wants to review uncommitted changes: run `git diff HEAD` (staged + unstaged) or `git diff --cached` (staged only).
+   - If the user wants to review changes vs. the main/base branch: run `git diff main...HEAD` (or `git diff origin/main...HEAD` if needed).
+   - If the user pastes a diff or file inline, use that directly — no need to run git commands.
+   - If the git command returns empty output (no diff), tell the user there's nothing staged/changed vs. the target branch, and ask them to clarify what to review.
+   - **Only read full file contents** when the diff alone is insufficient context to understand the change (e.g. a renamed symbol whose call sites need tracing). Read the minimal context needed — never load the entire file by default.
+2. **Review only what's in the diff.** The review scope is the changed lines and their immediate context — not the unchanged parts of the file. Don't flag issues in lines that weren't touched by this change.
+3. **Detect the stack** from the diff and changed file paths. Look for Next.js app-router markers (`app/`, `"use client"`, `page.tsx`), plain React+TS, Node/Express-style backend code (routes, controllers, middleware), and TanStack usage (`useQuery`, `useMutation`, `@tanstack/*` imports). Check `package.json` if available. If genuinely ambiguous and it changes what rules apply, ask.
+4. **Always load `references/team-conventions.md`** — the mandatory shared rulebook: git (branch/commit), naming, folder structure (Atomic Design), imports, table text-alignment. This applies regardless of stack.
+5. **Load the matching stack file(s)** — a file can match more than one (e.g. Next.js + TanStack Query):
    - `references/react-nextjs.md`
    - `references/react-typescript.md`
    - `references/react-tanstack.md`
    - `references/nodejs.md`
-5. **Load `references/general-best-practices.md`** for the stack-agnostic checks: performance/re-renders, state management, accessibility, security, testing.
-6. **Check every applicable category explicitly** — don't skip a category just because the code looks fine at a glance.
-7. **Classify severity** per the model below.
-8. **Report** using the format below.
-9. **Offer to fix.** Don't touch the code automatically — after the report, ask what the person wants done next. See "After the review" below.
+6. **Load `references/general-best-practices.md`** for the stack-agnostic checks: performance/re-renders, state management, accessibility, security, testing.
+7. **Check every applicable category explicitly** — don't skip a category just because the code looks fine at a glance. Apply each rule only to code that appears in the diff.
+8. **Classify severity** per the model below.
+9. **Report** using the format below.
+10. **Offer to fix.** Don't touch the code automatically — after the report, ask what the person wants done next. See "After the review" below.
 
 ## Severity model
 
